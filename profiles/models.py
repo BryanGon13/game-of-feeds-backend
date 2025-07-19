@@ -31,6 +31,9 @@ def __str__(self):
 # This function will be called automatically after a User is saved
 def create_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(owner=instance) # If the user is new, this will create a matching Profile and link it to that user (as 'owner')
+        Profile.objects.create(
+            owner=instance,
+            username=instance.username
+        )
 
-post_save.connect(create_profile, sender=User) # Every time a User is saved, Django sends out a signal and this function listens for it
+post_save.connect(create_profile, sender=User)
