@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Post
 from .serializers import PostSerializer
-from drf_api.permissions import IsOwnerOrReadOnly
+from game_of_feeds_backend.permissions import IsOwnerOrReadOnly
 
 # Create your views here.
 
