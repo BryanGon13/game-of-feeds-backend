@@ -7,6 +7,9 @@ class ProfileSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     following_id = serializers.SerializerMethodField()
     profile_image = serializers.ReadOnlyField(source='image.url')
+    posts_count = serializers.ReadOnlyField()
+    followers_count = serializers.ReadOnlyField()
+    following_count = serializers.ReadOnlyField()
 
     def get_is_owner(self, obj):
         request = self.context.get('request')
@@ -33,4 +36,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             'updated_at',
             'is_owner',
             'following_id',
+            'posts_count',
+            'followers_count',
+            'following_count',
         ]
