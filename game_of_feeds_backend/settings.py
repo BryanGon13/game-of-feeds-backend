@@ -2,14 +2,17 @@
 Django settings for game_of_feeds_backend project.
 """
 
-from dotenv import load_dotenv
-load_dotenv()
-from pathlib import Path
 import os
+from pathlib import Path
 import dj_database_url
+from dotenv import load_dotenv
+
+load_dotenv()
 
 if os.path.exists('env.py'):
     import env
+
+
 
 DEBUG = 'DEV' in os.environ
 

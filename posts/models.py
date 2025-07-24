@@ -1,17 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 
 
 # Create your models here.
 
 class Post(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
-    image = models.ImageField(
-        upload_to='game_of_feeds/post_images/', 
-        default='game_of_feeds/default_post_ysiykv', 
-        blank=False, 
-        null=False
-    )
+    image = CloudinaryField('image', blank=False, null=False)  # ✅ This is the key line
     caption = models.TextField(blank=True)
     likes = models.ManyToManyField(User, related_name='liked_posts', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
