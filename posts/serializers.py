@@ -7,6 +7,7 @@ class PostSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.profile_image.url')
+    image = serializers.SerializerMethodField()
     likes = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     like_id = serializers.SerializerMethodField() 
     comments_count = serializers.ReadOnlyField()
@@ -31,6 +32,11 @@ class PostSerializer(serializers.ModelSerializer):
             like = Like.objects.filter(owner=user, post=obj).first()
             return like.id if like else None
         return None
+    
+    def get_image(self, obj):
+        if obj.image and hasattr(obj.image, 'url'):
+            return obj.image.url
+        return ""
 
     class Meta:
         model = Post
