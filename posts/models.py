@@ -7,7 +7,7 @@ from cloudinary.models import CloudinaryField
 
 class Post(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
-    image = CloudinaryField('image', blank=False, null=False)  # ✅ This is the key line
+    image = CloudinaryField('image', blank=False, null=False)
     caption = models.TextField(blank=True)
     likes = models.ManyToManyField(User, related_name='liked_posts', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
