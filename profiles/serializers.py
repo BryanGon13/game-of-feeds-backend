@@ -15,6 +15,14 @@ class ProfileSerializer(serializers.ModelSerializer):
         request = self.context.get('request')
         return request.user == obj.owner if request and request.user.is_authenticated else False
 
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        if instance.profile_image:
+            request = self.context.get('request')
+            url = instance.profile_image.url
+            data['profile_image'] = request.build_absolute_uri(url) if request else url
+        return data
+
     def get_following_id(self, obj):
         user = self.context.get('request').user
         if user.is_authenticated:
