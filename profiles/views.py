@@ -1,5 +1,6 @@
 from django.db.models import Count
 from rest_framework import generics, filters
+from rest_framework.parsers import MultiPartParser, FormParser
 from django_filters.rest_framework import DjangoFilterBackend
 from game_of_feeds_backend.permissions import IsOwnerOrReadOnly
 from .models import Profile
@@ -41,6 +42,7 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
     Retrieve or update a profile if you're the owner.
     """
     permission_classes = [IsOwnerOrReadOnly]
+    parser_classes = [MultiPartParser, FormParser]
     queryset = Profile.objects.annotate(
         posts_count = Count('owner__posts', distinct=True),
         followers_count = Count('owner__followed', distinct=True),
