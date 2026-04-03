@@ -7,7 +7,7 @@ class CommentSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
-    profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
+    profile_image = serializers.ReadOnlyField(source='owner.profile.profile_image.url')
     created_at = serializers.SerializerMethodField()
     updated_at = serializers.SerializerMethodField()
 
@@ -19,7 +19,7 @@ class CommentSerializer(serializers.ModelSerializer):
         return naturaltime(obj.created_at)
     
     def get_updated_at(self, obj):
-        return naturaltime(obj.updates_at)
+        return naturaltime(obj.updated_at)
 
     class Meta:
         model = Comment
