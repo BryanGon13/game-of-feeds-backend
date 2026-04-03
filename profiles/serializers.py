@@ -18,10 +18,12 @@ class ProfileSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         stored = str(instance.profile_image) if instance.profile_image else ''
+        default_url = 'https://res.cloudinary.com/dctqmaht5/image/upload/v1752109202/default_profile_idzhze.jpg'
         if not stored or stored == 'game_of_feeds/default_profile_idzhze':
-            data['profile_image'] = 'https://res.cloudinary.com/dctqmaht5/image/upload/v1752109202/default_profile_idzhze.jpg'
+            data['profile_image'] = default_url
         else:
-            data['profile_image'] = instance.profile_image.url
+            url = instance.profile_image.url
+            data['profile_image'] = url.replace('http://', 'https://', 1)
         return data
 
     def get_following_id(self, obj):

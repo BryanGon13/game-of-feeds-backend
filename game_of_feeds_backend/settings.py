@@ -3,6 +3,7 @@ Django settings for game_of_feeds_backend project.
 """
 
 import os
+import cloudinary
 from pathlib import Path
 import dj_database_url
 from dotenv import load_dotenv
@@ -19,6 +20,7 @@ DEBUG = 'DEV' in os.environ
 CLOUDINARY_STORAGE = {
     'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')
 }
+cloudinary.config(secure=True)
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
