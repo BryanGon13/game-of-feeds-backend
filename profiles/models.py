@@ -11,7 +11,7 @@ class Profile(models.Model):
     bio = models.TextField(blank=True)
     profile_image = CloudinaryField(
         'image',
-        default='game_of_feeds/default_profile_idzhze'
+        default='default_profile_idzhze'
     )
     house = models.CharField(max_length=100, blank=True) # (Stark, Lannister etc...)
     followers = models.ManyToManyField(   # Social feature — tracks who follows this profile
