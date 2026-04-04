@@ -4,6 +4,14 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
 
+class House(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Profile(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
     username = models.CharField(max_length=150, unique=True)
@@ -13,8 +21,14 @@ class Profile(models.Model):
         'image',
         default='default_profile_idzhze'
     )
-    house = models.CharField(max_length=100, blank=True) # (Stark, Lannister etc...)
-    followers = models.ManyToManyField(   # Social feature — tracks who follows this profile
+    house = models.ForeignKey(
+        House,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='members'
+    )
+    followers = models.ManyToManyField(
         'self',
         symmetrical=False,
         related_name='following',
@@ -24,12 +38,12 @@ class Profile(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-created_at']  # Newest profiles appear first
+        ordering = ['-created_at']
 
-def __str__(self):
-    return f"{self.owner}'s profile"
+    def __str__(self):
+        return f"{self.owner}'s profile"
 
-# This function will be called automatically after a User is saved
+
 def create_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(

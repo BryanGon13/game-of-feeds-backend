@@ -1,6 +1,13 @@
 from rest_framework import serializers
 from followers.models import Follower
-from .models import Profile
+from .models import House, Profile
+
+
+class HouseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = House
+        fields = ['id', 'name', 'description']
+
 
 class ProfileSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
@@ -10,6 +17,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     posts_count = serializers.ReadOnlyField()
     followers_count = serializers.ReadOnlyField()
     following_count = serializers.ReadOnlyField()
+    house_name = serializers.ReadOnlyField(source='house.name')
 
     def get_is_owner(self, obj):
         request = self.context.get('request')
@@ -42,6 +50,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             'display_name',
             'bio',
             'house',
+            'house_name',
             'profile_image',
             'created_at',
             'updated_at',
