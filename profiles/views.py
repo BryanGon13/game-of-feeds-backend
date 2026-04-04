@@ -1,10 +1,15 @@
 from django.db.models import Count
 from rest_framework import generics, filters
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from django_filters.rest_framework import DjangoFilterBackend
 from game_of_feeds_backend.permissions import IsOwnerOrReadOnly
-from .models import Profile
-from .serializers import ProfileSerializer
+from .models import House, Profile
+from .serializers import HouseSerializer, ProfileSerializer
+
+
+class HouseList(generics.ListAPIView):
+    queryset = House.objects.all().order_by('name')
+    serializer_class = HouseSerializer
 
 
 class ProfileList(generics.ListAPIView):
@@ -42,7 +47,7 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
     Retrieve or update a profile if you're the owner.
     """
     permission_classes = [IsOwnerOrReadOnly]
-    parser_classes = [MultiPartParser, FormParser]
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
     queryset = Profile.objects.annotate(
         posts_count = Count('owner__posts', distinct=True),
         followers_count = Count('owner__followed', distinct=True),
