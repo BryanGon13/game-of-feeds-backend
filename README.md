@@ -3,6 +3,18 @@
 
 [**Link to the live website**](https://game-of-feeds-frontend-cf67b44b0611.herokuapp.com/)
 
+## Project Documentation
+
+The full project documentation, including detailed design explanations, feature breakdowns, wireframes, and frontend functionality, is maintained in the frontend repository.
+
+Due to differences in repository structure, some assets such as images and UI-related visuals are only available in the frontend README.
+
+To view the complete project documentation, please visit:
+
+👉 https://github.com/BryanGon13/game-of-feeds-frontend
+
+This backend repository focuses on the API implementation, data models, and server-side logic that support the frontend application.
+
 
 # Project Overview
 
@@ -16,9 +28,6 @@ The application allows users to create posts, browse a feed of content, explore 
 
 ### Homepage
 
-![Wireframe Screenshot](./src/assets/Wireframe-home.png)
-![Homepage Screenshot](./src/assets/Screenshot%202026-04-05%20at%2001.48.32.png)
-
 **Design Rationale:**
 The homepage serves as the main content feed where users can browse posts shared by the various Game of Thrones characters.
 
@@ -26,9 +35,6 @@ The design prioritises simplicity and usability. Posts are displayed in a struct
 A search bar allows users to quickly locate specific characters by username, while a filter option allows the feed to be organised based on different criteria. These features improve usability and allow users to navigate large amounts of content efficiently.
 
 ### Create Post
-
-![wireframe Screenshot](./src/assets/upload-%20WF.png)
-![Create Post Page Screenshot](./src/assets/cp.png)
 
 **Design Rationale:**
 The create post page allows users to upload an image and write a caption for their post.
@@ -38,9 +44,6 @@ The interface was designed to be minimal and straightforward. Users simply uploa
 This design reflects the project’s goal of creating a simple and accessible posting experience, similar to other popular social media platforms.
 
 ### Profile Page
-
-![Wireframe Screenshot](./src/assets/Profile-WF.png)
-![Profile Page Screenshot](./src/assets/Profile-SC.png)
 
 **Design Rationale:**
 Each character has their own profile page where users can view their information and posts.
@@ -55,7 +58,6 @@ The posts are displayed in a miniature grid layout, allowing users to quickly br
 
 
 ## Key Features
-
 
 
 - **Character Profiles**  
@@ -484,10 +486,10 @@ The platform was designed with accessibility considerations including sufficient
 To ensure code quality and best practices, the following validation tools were used:
 
 - **HTML** — All HTML templates were tested using the [W3C Markup Validation Service](https://validator.w3.org/).  
-![W3C HTML Screenshot](./src/assets/html.png)
+
 
 - **CSS** — All custom CSS was tested with the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/).  
-![W3C CSS Screenshot](./src/assets/css.png)
+
 
 
 All validation tools reported no critical errors. 
